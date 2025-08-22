@@ -20,11 +20,9 @@
             --marrom-dourado: #D2B48C;
             --branco: #FFFFFF;
             --preto: #000000;
-            --cinza: #333333;
+            --cinza: #612020;
             --cinza-claro: #f5f5f5;
             --sombra: 0 4px 8px rgba(0, 0, 0, 0.15);
-            --azul-refri: #1E90FF;
-            --azul-refri-claro: #87CEFA;
         }
 
         body {
@@ -37,7 +35,7 @@
             background: var(--branco);
             color: var(--marrom-escuro);
             padding: 20px;
-            text-align: center;
+            text-align: center; 
             box-shadow: var(--sombra);
             position: relative;
             border-bottom: 4px solid var(--marrom-dourado);
@@ -59,9 +57,9 @@
         }
 
         .carrinho-flutuante {
-            position: absolute;
-            right: 20px;
-            bottom: -25px;
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
             background: var(--marrom-dourado);
             color: var(--marrom-escuro);
             border-radius: 50%;
@@ -73,6 +71,7 @@
             font-size: 1.5rem;
             box-shadow: var(--sombra);
             cursor: pointer;
+            z-index: 1000;
             transition: transform 0.3s;
         }
 
@@ -196,11 +195,11 @@
         }
 
         .refrigerantes-title {
-            color: var(--azul-refri);
+            color: var(--marrom-escuro);
         }
 
         .refrigerantes-title::after {
-            background: var(--azul-refri);
+            background: var(--marrom-madeira);
         }
 
         .cardapio {
@@ -221,7 +220,7 @@
         }
 
         .item-cardapio.refri {
-            border: 1px solid var(--azul-refri-claro);
+            border: 1px solid var(--marrom-dourado);
         }
 
         .item-cardapio:hover {
@@ -248,7 +247,7 @@
         }
 
         .item-imagem.refri {
-            background: linear-gradient(45deg, var(--azul-refri), var(--azul-refri-claro));
+            background: linear-gradient(45deg, var(--marrom-claro), var(--marrom-madeira));
         }
 
         .item-imagem::before {
@@ -263,7 +262,7 @@
         }
 
         .item-imagem.refri::before {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%231E90FF"/><path d="M0,0 L50,50 M50,0 L0,50" stroke="%231E90FF" stroke-width="1"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23A0522D"/><path d="M0,0 L50,50 M50,0 L0,50" stroke="%238B4513" stroke-width="1"/></svg>');
         }
 
         .item-imagem i {
@@ -284,7 +283,7 @@
         }
 
         .item-titulo.refri {
-            color: var(--azul-refri);
+            color: var(--marrom-escuro);
         }
 
         .item-titulo i {
@@ -293,7 +292,7 @@
         }
 
         .item-titulo.refri i {
-            color: var(--azul-refri);
+            color: var(--marrom-madeira);
         }
 
         .item-descricao {
@@ -313,7 +312,7 @@
         }
 
         .item-preco.refri {
-            color: var(--azul-refri);
+            color: var(--marrom-madeira);
         }
 
         .item-preco i {
@@ -342,7 +341,7 @@
         }
 
         .quantidade button.refri {
-            background-color: var(--azul-refri);
+            background-color: var(--marrom-madeira);
         }
 
         .quantidade button:hover {
@@ -350,7 +349,7 @@
         }
 
         .quantidade button.refri:hover {
-            background-color: var(--azul-refri-claro);
+            background-color: var(--marrom-escuro);
         }
 
         .quantidade input {
@@ -364,7 +363,7 @@
         }
 
         .quantidade input.refri {
-            border: 2px solid var(--azul-refri-claro);
+            border: 2px solid var(--marrom-claro);
         }
 
         .btn-adicionar {
@@ -384,7 +383,7 @@
         }
 
         .btn-adicionar.refri {
-            background: linear-gradient(to right, var(--azul-refri), var(--azul-refri-claro));
+            background: linear-gradient(to right, var(--marrom-escuro), var(--marrom-madeira));
         }
 
         .btn-adicionar i {
@@ -537,6 +536,38 @@
             font-size: 1rem;
         }
 
+        .dados-cliente {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid var(--marrom-dourado);
+        }
+
+        .dados-cliente h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: left;
+            justify-content: flex-start;
+        }
+
+        .campo-dados {
+            margin-bottom: 15px;
+        }
+
+        .campo-dados label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--marrom-escuro);
+        }
+
+        .campo-dados input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--marrom-claro);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
         .btn-finalizar {
             background: linear-gradient(to right, var(--marrom-escuro), var(--marrom-madeira));
             color: var(--branco);
@@ -607,11 +638,10 @@
             }
             
             .carrinho-flutuante {
-                top: -15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
+                right: 20px;
+                bottom: 20px;
+                width: 50px;
+                height: 50px;
             }
             
             .cardapio {
@@ -657,6 +687,9 @@
             </button>
             <button class="categoria-btn" onclick="filtrarCardapio('lanches')">
                 <i class="fas fa-hamburger"></i> Lanches
+            </button>
+            <button class="categoria-btn" onclick="filtrarCardapio('baguetes')">
+                <i class="fas fa-bread-slice"></i> Baguetes
             </button>
             <button class="categoria-btn" onclick="filtrarCardapio('refrigerantes')">
                 <i class="fas fa-glass-whiskey"></i> Refrigerantes
@@ -840,18 +873,137 @@
             </div>
         </div>
 
+        <div class="categoria-section" id="baguetes">
+            <h2 class="menu-title">Baguetes</h2>
+            <div class="cardapio">
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="baguetefrangro.jpeg" alt="Baguete de Frango com Catupiry">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-drumstick-bite"></i> Baguete de Frango </h3>
+                        <p class="item-descricao">Frango,bacon,mussarela,cheddar,vinagrete(rucula ou alface).</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 30,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="baguetechurrasco.jpeg" alt="Baguete de Churrasco Tradicional">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-pepper-hot"></i> Churrasco Tradicional</h3>
+                        <p class="item-descricao">Contra file, mussarela, 2 ovos, vinagrete ( rúcula ou alface).</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 38,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="2Baguete-Folhada_7002.webp" alt="Baguete de Pernil">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-bacon"></i> Guloso na baguete</h3>
+                        <p class="item-descricao">Contra file, Bacon, 2 queijos, 2 ovos, vinagrete.</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 29,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="baguetecostela.jpeg" alt="Baguete de Costela">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-utensils"></i> Baguete de Costela</h3>
+                        <p class="item-descricao">Costela desfiada, queijo, vinagrete, molho da casa, (rúcula ou alface).</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 35,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="baguetelinguca.jpeg" alt="Baguete de linguiça">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-fish"></i> Baguete de linguiça</h3>
+                        <p class="item-descricao">Linguiça, queijo, vinagrete, molho da casa (rúcula ou alface).</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 25,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="baguetes">
+                    <div class="item-imagem">
+                        <img src="hotbaguete.jpeg" alt="Hot Baguete">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-leaf"></i> Hot Baguete </h3>
+                        <p class="item-descricao">3 salsichas, molho especial, milho, ervilha, batata palha, queijo especial, (rúcula ou alface)</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 27,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="categoria-section" id="refrigerantes">
             <h2 class="menu-title refrigerantes-title">Refrigerantes</h2>
             
             <div class="cardapio">
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="coca-cola.jpg" alt="Coca-Cola">
+                        <img src="cocacolalata.jpeg" alt="Coca-Cola">
                     </div>
                     <div class="item-info">
                         <h3 class="item-titulo refri"><i class="fas fa-cookie-bite"></i> Coca-Cola</h3>
                         <p class="item-descricao">Lata 350ml - Refrigerante sabor cola</p>
-                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 6,90</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,50</p>
                         <div class="quantidade">
                             <button class="refri" onclick="decrementar(this)">-</button>
                             <input class="refri" type="number" value="1" min="1">
@@ -865,12 +1017,12 @@
 
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="guarana.jpg" alt="Guaraná Antarctica">
+                        <img src="guaranaantarticalata.jpeg" alt="Guaraná Antarctica">
                     </div>
                     <div class="item-info">
                         <h3 class="item-titulo refri"><i class="fas fa-lemon"></i> Guaraná Antarctica</h3>
                         <p class="item-descricao">Lata 350ml - Refrigerante sabor guaraná</p>
-                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,90</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,50</p>
                         <div class="quantidade">
                             <button class="refri" onclick="decrementar(this)">-</button>
                             <input class="refri" type="number" value="1" min="1">
@@ -884,7 +1036,7 @@
 
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="fanta-uva.jpg" alt="Fanta Uva">
+                        <img src="fanta350ml.jpeg" alt="Fanta Uva">
                     </div>
                     <div class="item-info">
                         <h3 class="item-titulo refri"><i class="fas fa-apple-alt"></i> Fanta Uva</h3>
@@ -903,7 +1055,7 @@
 
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="fanta-laranja.jpg" alt="Fanta Laranja">
+                        <img src="fantalaranja.jpeg" alt="Fanta Laranja">
                     </div>
                     <div class="item-info">
                         <h3 class="item-titulo refri"><i class="fas fa-orange"></i> Fanta Laranja</h3>
@@ -922,7 +1074,7 @@
 
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="sprite.jpg" alt="Sprite">
+                        <img src="spritelata.jpeg" alt="Sprite">
                     </div>
                     <div class="item-info">
                         <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Sprite</h3>
@@ -941,12 +1093,88 @@
 
                 <div class="item-cardapio refri" data-categoria="refrigerantes">
                     <div class="item-imagem refri">
-                        <img src="pepsi.jpg" alt="Pepsi">
+                        <img src="coca2l.png" alt="Coca-Cola 2L">
                     </div>
                     <div class="item-info">
-                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Pepsi</h3>
-                        <p class="item-descricao">Lata 350ml - Refrigerante sabor cola</p>
-                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,00</p>
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Coca-Cola 2L</h3>
+                        <p class="item-descricao">Garrafa 2 Litros - Refrigerante sabor cola</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 12,00</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="vencetex.jpg" alt="Guaraná Vencetex 2L">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Guaraná Vencetex 2L</h3>
+                        <p class="item-descricao">Garrafa 2 Litros - Refrigerante sabor guaraná</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 10,00</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="antartica2l.jpeg" alt="Guaraná Antarctica 2L">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Guaraná Antarctica 2L</h3>
+                        <p class="item-descricao">Garrafa 2 Litros - Refrigerante sabor guaraná</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 10,50</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="fanta2l.webp" alt="Fanta Laranja 2L">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-orange"></i> Fanta Laranja 2L</h3>
+                        <p class="item-descricao">Garrafa 2 Litros - Refrigerante sabor laranja</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 10,50</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="sprite2l.webp" alt="Sprite 2L">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Sprite 2L</h3>
+                        <p class="item-descricao">Garrafa 2 Litros - Refrigerante sabor limão</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 10,50</p>
                         <div class="quantidade">
                             <button class="refri" onclick="decrementar(this)">-</button>
                             <input class="refri" type="number" value="1" min="1">
@@ -997,6 +1225,36 @@
                 <input type="text" id="valor-troco" placeholder="Ex: 50,00">
             </div>
             
+            <div class="dados-cliente">
+                <h2><i class="fas fa-user-circle"></i> Seus Dados para Entrega</h2>
+                <div class="campo-dados">
+                    <label for="cliente-nome">Nome:</label>
+                    <input type="text" id="cliente-nome" placeholder="Digite seu nome completo">
+                </div>
+                <div class="campo-dados">
+                    <label for="cliente-telefone">Telefone (WhatsApp):</label>
+                    <input type="text" id="cliente-telefone" placeholder="(XX) XXXXX-XXXX">
+                </div>
+                <div class="campo-dados">
+                    <label for="cliente-endereco">Endereço (Rua e Número):</label>
+                    <input type="text" id="cliente-endereco" placeholder="Ex: Rua das Flores, 123">
+                </div>
+                <div class="campo-dados">
+                    <label for="cliente-numero">Número da Residência:</label>
+                    <input type="text" id="cliente-numero" placeholder="Ex: 123">
+                    <!-- Adicionado campo para o número da residência -->
+
+                </div>
+                <div class="campo-dados">
+                    <label for="cliente-bairro">Bairro:</label>
+                    <input type="text" id="cliente-bairro" placeholder="Ex: Centro">
+                </div>
+                <div class="campo-dados">
+                    <label for="cliente-referencia">Ponto de Referência (Opcional):</label>
+                    <input type="text" id="cliente-referencia" placeholder="Ex: Próximo ao mercado">
+                </div>
+            </div>
+
             <button class="btn-finalizar" onclick="finalizarPedido()">
                 <i class="fas fa-check-circle"></i> Finalizar Pedido
             </button>
@@ -1004,7 +1262,7 @@
     </div>
 
     <footer id="contato">
-        <p>Júliu's Lanche &copy; 2025 - Todos os direitos reservados</p>
+        <p>Thyesko Menão &copy; 2025 - Todos os direitos reservados</p>
         <p>Endereço: Rua dos Sabores, 123 - Centro - Telefone: (11) 99999-9999</p>
         <p>Horário de funcionamento: Segunda a Sábado, das 18h às 23h</p>
         <div class="redes-sociais">
@@ -1123,41 +1381,79 @@
         
         function finalizarPedido() {
             if (carrinhoItens.length === 0) {
-                alert('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.');
+                alert('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido!');
                 return;
             }
             
+            // Coletar dados do cliente
+            const nome = document.getElementById('cliente-nome').value;
+            const telefone = document.getElementById('cliente-telefone').value;
+            const endereco = document.getElementById('cliente-endereco').value;
+            const numero = document.getElementById('cliente-numero').value; // Coleta o número da residência
+            const bairro = document.getElementById('cliente-bairro').value;
+            const referencia = document.getElementById('cliente-referencia').value;
+
+            // Validar dados do cliente
+            if (!nome || !telefone || !endereco || !numero || !bairro) { // Adicionado 'numero' na validação
+                alert('Por favor, preencha todos os seus dados para a entrega (Nome, Telefone, Endereço, Número e Bairro).');
+                document.getElementById('cliente-nome').focus();
+                return;
+            }
+
             const formaPagamento = document.querySelector('input[name="pagamento"]:checked').value;
             const trocoInput = document.getElementById('valor-troco').value;
             
-            let mensagem = 'Pedido finalizado com sucesso!\n\n';
-            mensagem += 'Itens do pedido:\n';
+            let mensagem = '🍔 *NOVO PEDIDO - JÚLIU\'S LANCHE* 🍔\n\n';
+            mensagem += `*Cliente:* ${nome}\n`;
+            mensagem += `*Telefone:* ${telefone}\n`;
+            mensagem += `*Número:* ${numero}\n`; // Adicionado o número na mensagem
+            mensagem += `*Endereço:* ${endereco}\n`;
+            mensagem += `*Bairro:* ${bairro}\n`;
+            if (referencia) {
+                mensagem += `*Referência:* ${referencia}\n`;
+            }
+            mensagem += '\n----------------------------------\n\n';
+            mensagem += '*Itens do pedido:*\n';
             
             let total = 0;
             carrinhoItens.forEach(item => {
                 const itemTotal = item.preco * item.quantidade;
                 total += itemTotal;
-                mensagem += `${item.quantidade}x ${item.nome} - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+                mensagem += `- ${item.quantidade}x ${item.nome} - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
             });
             
-            mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}\n`;
-            mensagem += `Forma de pagamento: ${formaPagamento}\n`;
+            mensagem += `\n*Total:* R$ ${total.toFixed(2).replace('.', ',')}\n`;
+            mensagem += `*Forma de pagamento:* ${formaPagamento.charAt(0).toUpperCase() + formaPagamento.slice(1).replace('-', ' ')}\n`;
             
             if (formaPagamento === 'dinheiro' && trocoInput) {
                 const troco = parseFloat(trocoInput.replace(',', '.'));
-                if (troco > total) {
+                if (!isNaN(troco) && troco >= total) {
                     const valorTroco = troco - total;
-                    mensagem += `Troco para: R$ ${troco.toFixed(2).replace('.', ',')}\n`;
-                    mensagem += `Seu troco: R$ ${valorTroco.toFixed(2).replace('.', ',')}`;
+                    mensagem += `*Troco para:* R$ ${troco.toFixed(2).replace('.', ',')}\n`;
+                    mensagem += `*Seu troco:* R$ ${valorTroco.toFixed(2).replace('.', ',')}\n`;
+                } else if (!isNaN(troco) && troco < total) {
+                    mensagem += `*Atenção:* O valor informado para troco (R$ ${troco.toFixed(2).replace('.', ',')}) é menor que o total do pedido.\n`;
                 }
             }
             
-            alert(mensagem);
+            // Número de telefone para o WhatsApp (substitua pelo seu número, incluindo o código do país e DDD)
+            const numeroWhatsApp = '5567999361566'; // Número atualizado
+            const mensagemWhatsApp = encodeURIComponent(mensagem);
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemWhatsApp}`;
+
+            window.open(urlWhatsApp, '_blank');
+            alert('Seu pedido foi enviado para o WhatsApp! Aguarde a confirmação.');
             
             // Limpar carrinho após finalizar pedido
             carrinhoItens = [];
             atualizarCarrinho();
             document.getElementById('valor-troco').value = '';
+            document.getElementById('cliente-nome').value = '';
+            document.getElementById('cliente-telefone').value = '';
+            document.getElementById('cliente-endereco').value = '';
+            document.getElementById('cliente-numero').value = ''; // Limpa o campo do número
+            document.getElementById('cliente-bairro').value = '';
+            document.getElementById('cliente-referencia').value = '';
         }
 
         function filtrarCardapio(categoria) {
@@ -1186,6 +1482,8 @@
                 document.getElementById('refrigerantes').scrollIntoView({ behavior: 'smooth' });
             } else if (categoria === 'lanches') {
                 document.getElementById('cardapio').scrollIntoView({ behavior: 'smooth' });
+            } else if (categoria === 'baguetes') {
+                document.getElementById('baguetes').scrollIntoView({ behavior: 'smooth' });
             }
         }
     </script>
