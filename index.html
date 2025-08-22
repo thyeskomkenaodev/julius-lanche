@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Júliu's Lanche - A melhor lanchonete da região</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --marrom-madeira: #8B4513;
+            --marrom-claro: #A0522D;
+            --marrom-escuro: #654321;
+            --marrom-dourado: #D2B48C;
+            --branco: #FFFFFF;
+            --preto: #000000;
+            --cinza: #333333;
+            --cinza-claro: #f5f5f5;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.15);
+            --azul-refri: #1E90FF;
+            --azul-refri-claro: #87CEFA;
+        }
+
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--cinza);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f5f5"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23e0e0e0" stroke-width="0.5"/></svg>');
+        }
+
+        header {
+            background: var(--branco);
+            color: var(--marrom-escuro);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            position: relative;
+            border-bottom: 4px solid var(--marrom-dourado);
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-imagem {
+            height: 60px; /* Ajuste a altura conforme necessário */
+            margin-right: 15px;
+        }
+
+        .carrinho-flutuante {
+            position: absolute;
+            right: 20px;
+            bottom: -25px;
+            background: var(--marrom-dourado);
+            color: var(--marrom-escuro);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .carrinho-flutuante:hover {
+            transform: scale(1.1);
+        }
+
+        .contador-carrinho {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--marrom-escuro);
+            color: var(--branco);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400"><rect width="1200" height="400" fill="%23A0522D"/></svg>');
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: var(--sombra);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('logotipo.jpg'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .banner h1 {
+            color: var(--branco);
+            font-size: 3.2rem;
+            text-shadow: 2px 2px 8px var(--preto);
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .categorias {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .categoria-btn {
+            background: var(--branco);
+            border: 2px solid var(--marrom-madeira);
+            padding: 10px 20px;
+            margin: 5px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .categoria-btn i {
+            margin-right: 8px;
+            color: var(--marrom-madeira);
+        }
+
+        .categoria-btn:hover, .categoria-btn.ativo {
+            background: var(--marrom-madeira);
+            color: var(--branco);
+        }
+
+        .categoria-btn.ativo i {
+            color: var(--branco);
+        }
+
+        .menu-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: var(--marrom-escuro);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .menu-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--marrom-madeira);
+            border-radius: 2px;
+        }
+
+        .refrigerantes-title {
+            color: var(--azul-refri);
+        }
+
+        .refrigerantes-title::after {
+            background: var(--azul-refri);
+        }
+
+        .cardapio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .item-cardapio {
+            background-color: var(--branco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid var(--marrom-dourado);
+        }
+
+        .item-cardapio.refri {
+            border: 1px solid var(--azul-refri-claro);
+        }
+
+        .item-cardapio:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-imagem {
+            height: 200px;
+            background: linear-gradient(45deg, var(--marrom-claro), var(--marrom-madeira));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-imagem.refri {
+            background: linear-gradient(45deg, var(--azul-refri), var(--azul-refri-claro));
+        }
+
+        .item-imagem::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23A0522D"/><path d="M0,0 L50,50 M50,0 L0,50" stroke="%238B4513" stroke-width="1"/></svg>');
+            opacity: 0.2;
+        }
+
+        .item-imagem.refri::before {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%231E90FF"/><path d="M0,0 L50,50 M50,0 L0,50" stroke="%231E90FF" stroke-width="1"/></svg>');
+        }
+
+        .item-imagem i {
+            font-size: 3rem;
+            z-index: 1;
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-titulo {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--marrom-escuro);
+            display: flex;
+            align-items: center;
+        }
+
+        .item-titulo.refri {
+            color: var(--azul-refri);
+        }
+
+        .item-titulo i {
+            margin-right: 10px;
+            color: var(--marrom-madeira);
+        }
+
+        .item-titulo.refri i {
+            color: var(--azul-refri);
+        }
+
+        .item-descricao {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--cinza);
+        }
+
+        .item-preco {
+            font-weight: bold;
+            color: var(--marrom-madeira);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .item-preco.refri {
+            color: var(--azul-refri);
+        }
+
+        .item-preco i {
+            margin-right: 8px;
+        }
+
+        .quantidade {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .quantidade button {
+            background-color: var(--marrom-madeira);
+            color: var(--branco);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantidade button.refri {
+            background-color: var(--azul-refri);
+        }
+
+        .quantidade button:hover {
+            background-color: var(--marrom-escuro);
+        }
+
+        .quantidade button.refri:hover {
+            background-color: var(--azul-refri-claro);
+        }
+
+        .quantidade input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+            border: 2px solid var(--marrom-claro);
+            border-radius: 6px;
+            padding: 6px;
+            font-weight: bold;
+        }
+
+        .quantidade input.refri {
+            border: 2px solid var(--azul-refri-claro);
+        }
+
+        .btn-adicionar {
+            background: linear-gradient(to right, var(--marrom-escuro), var(--marrom-madeira));
+            color: var(--branco);
+            border: none;
+            padding: 12px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-adicionar.refri {
+            background: linear-gradient(to right, var(--azul-refri), var(--azul-refri-claro));
+        }
+
+        .btn-adicionar i {
+            margin-right: 10px;
+        }
+
+        .btn-adicionar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .carrinho {
+            background-color: var(--branco);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            margin-bottom: 40px;
+            border: 2px solid var(--marrom-dourado);
+        }
+
+        .carrinho h2 {
+            color: var(--marrom-escuro);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carrinho h2 i {
+            margin-right: 12px;
+            color: var(--marrom-madeira);
+        }
+
+        .carrinho-itens {
+            margin-bottom: 20px;
+        }
+
+        .carrinho-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--marrom-dourado);
+            align-items: center;
+        }
+
+        .carrinho-item-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .carrinho-item-remover {
+            background: var(--marrom-escuro);
+            color: var(--branco);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .carrinho-item-remover:hover {
+            background: #ff0000;
+        }
+
+        .carrinho-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 0;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--marrom-escuro);
+            border-top: 2px solid var(--marrom-dourado);
+        }
+
+        .formas-pagamento {
+            background-color: var(--branco);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            margin-bottom: 40px;
+            border: 2px solid var(--marrom-dourado);
+        }
+
+        .formas-pagamento h2 {
+            color: var(--marrom-escuro);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .formas-pagamento h2 i {
+            margin-right: 12px;
+            color: var(--marrom-madeira);
+        }
+
+        .opcoes-pagamento {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .opcao-pagamento {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid var(--marrom-dourado);
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .opcao-pagamento:hover {
+            background-color: var(--marrom-dourado);
+        }
+
+        .opcao-pagamento input {
+            margin-right: 10px;
+        }
+
+        .troco {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--marrom-dourado);
+            border-radius: 8px;
+        }
+
+        .troco label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--marrom-escuro);
+        }
+
+        .troco input {
+            padding: 12px;
+            border: 2px solid var(--marrom-claro);
+            border-radius: 6px;
+            width: 100%;
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        .btn-finalizar {
+            background: linear-gradient(to right, var(--marrom-escuro), var(--marrom-madeira));
+            color: var(--branco);
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-finalizar i {
+            margin-right: 12px;
+        }
+
+        .btn-finalizar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--marrom-escuro), var(--marrom-madeira));
+            color: var(--branco);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 4px solid var(--marrom-dourado);
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        .redes-sociais {
+            margin: 15px 0;
+        }
+
+        .redes-sociais a {
+            color: var(--branco);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .redes-sociais a:hover {
+            color: var(--marrom-dourado);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+            }
+            
+            .banner h1 {
+                font-size: 2.2rem;
+            }
+            
+            .carrinho-flutuante {
+                top: -15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .cardapio {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        .animar {
+            animation: pulse 0.5s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .categoria-section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="imagemnova.png" alt="Logotipo Júliu's Lanche" class="logo-imagem">
+            <span>Júliu's Lanche</span>
+        </div>
+        <div class="carrinho-flutuante" onclick="scrollToCarrinho()">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="contador-carrinho">0</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="banner">
+            <h1>Os melhores lanches com sabor caseiro!</h1>
+        </div>
+
+        <div class="categorias">
+            <button class="categoria-btn ativo" onclick="filtrarCardapio('tudo')">
+                <i class="fas fa-utensils"></i> Tudo
+            </button>
+            <button class="categoria-btn" onclick="filtrarCardapio('lanches')">
+                <i class="fas fa-hamburger"></i> Lanches
+            </button>
+            <button class="categoria-btn" onclick="filtrarCardapio('refrigerantes')">
+                <i class="fas fa-glass-whiskey"></i> Refrigerantes
+            </button>
+        </div>
+
+        <div class="categoria-section" id="cardapio">
+            <h2 class="menu-title">Lanches</h2>
+            
+            <div class="cardapio">
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xmanobra.jpeg" alt="Lanche X Manobra">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-cheese"></i> x manobra</h3>
+                        <p class="item-descricao">hambúrguer da casa , calabresa , bacon ,ovo, salsicha, presunto, mussarela, milho, ervilha, tomate e alfaçe .</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 30,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xcalabacon.jpeg" alt="Lanche X-Cabacinha">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-bacon"></i> X-CalaBacon</h3>
+                        <p class="item-descricao">hambúrguer da casa , calabresa , bacon ,  presunto, mussarela, milho, ervilha, tomate e alfaçe .</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 28,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xcalabresa.jpeg" alt="Lanche X-">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-leaf"></i> X-Calabresa</h3>
+                        <p class="item-descricao">hambúrguer da casa , calabresa ,   presunto, mussarela, milho, ervilha, tomate e alfaçe .</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 26,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xsalada.jpeg" alt="Lanche X-Tudo">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-cheeseburger"></i> X-Salada</h3>
+                        <p class="item-descricao"> hambúrguer da casa , presunto,mussarela, milho, ervilha, tomate e alface .</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 20,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xburgao.jpeg" alt="Porção de Batata Frita">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-french-fries"></i> X-Burgão</h3>
+                        <p class="item-descricao"> 2 hambúrguer da casa , presunto, mussarela, milho, ervilha, tomate e alface .</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 31,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xjulius.jpeg" alt="Lanche X-Julius">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-egg"></i> X-Julius</h3>
+                        <p class="item-descricao">Hambúrguer da casa, calabresa, bacon, ovo, frango, presunto, mussarela, milho, ervilha, tomate e alface.</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 32,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="sdog.jpeg" alt="Lanche X-dog">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-drumstick-bite"></i> X-dog</h3>
+                        <p class="item-descricao">2 salsichas, presunto, mussarela, batata palha, milho, ervilha, tomate e alface.</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 22,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xfrangobacon.jpeg" alt="Lanche X-Frango Bacon">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-heart"></i> X-Frango Bacon</h3>
+                        <p class="item-descricao">frango, bacon, presunto, mussarela, milho, ervilha, tomate e alface.</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 26,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio" data-categoria="lanches">
+                    <div class="item-imagem">
+                        <img src="xbacon.jpeg" alt="Misto Quente">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo"><i class="fas fa-bread-slice"></i> X-Bacon</h3>
+                        <p class="item-descricao">hambúrguer da casa, bacon, presunto,mussarela, milho, ervilha, tomate e alface.</p>
+                        <p class="item-preco"><i class="fas fa-tag"></i> R$ 26,00</p>
+                        <div class="quantidade">
+                            <button onclick="decrementar(this)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="categoria-section" id="refrigerantes">
+            <h2 class="menu-title refrigerantes-title">Refrigerantes</h2>
+            
+            <div class="cardapio">
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="coca-cola.jpg" alt="Coca-Cola">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-cookie-bite"></i> Coca-Cola</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor cola</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 6,90</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="guarana.jpg" alt="Guaraná Antarctica">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-lemon"></i> Guaraná Antarctica</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor guaraná</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,90</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="fanta-uva.jpg" alt="Fanta Uva">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-apple-alt"></i> Fanta Uva</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor uva</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,50</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="fanta-laranja.jpg" alt="Fanta Laranja">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-orange"></i> Fanta Laranja</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor laranja</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,50</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="sprite.jpg" alt="Sprite">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Sprite</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor limão</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,50</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-cardapio refri" data-categoria="refrigerantes">
+                    <div class="item-imagem refri">
+                        <img src="pepsi.jpg" alt="Pepsi">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-titulo refri"><i class="fas fa-wine-bottle"></i> Pepsi</h3>
+                        <p class="item-descricao">Lata 350ml - Refrigerante sabor cola</p>
+                        <p class="item-preco refri"><i class="fas fa-tag"></i> R$ 5,00</p>
+                        <div class="quantidade">
+                            <button class="refri" onclick="decrementar(this)">-</button>
+                            <input class="refri" type="number" value="1" min="1">
+                            <button class="refri" onclick="incrementar(this)">+</button>
+                        </div>
+                        <button class="btn-adicionar refri" onclick="adicionarAoCarrinho(this)">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carrinho" id="carrinho">
+            <h2><i class="fas fa-shopping-cart"></i> Seu Carrinho</h2>
+            <div class="carrinho-itens">
+                <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+            </div>
+            <div class="carrinho-total">
+                <span>Total:</span>
+                <span>R$ 0,00</span>
+            </div>
+        </div>
+
+        <div class="formas-pagamento">
+            <h2><i class="fas fa-money-bill-wave"></i> Forma de Pagamento</h2>
+            <div class="opcoes-pagamento">
+                <div class="opcao-pagamento">
+                    <input type="radio" id="dinheiro" name="pagamento" value="dinheiro" checked>
+                    <label for="dinheiro">Dinheiro</label>
+                </div>
+                <div class="opcao-pagamento">
+                    <input type="radio" id="cartao-debito" name="pagamento" value="cartao-debito">
+                    <label for="cartao-debito">Cartão de Débito</label>
+                </div>
+                <div class="opcao-pagamento">
+                    <input type="radio" id="cartao-credito" name="pagamento" value="cartao-credito">
+                    <label for="cartao-credito">Cartão de Crédito</label>
+                </div>
+                <div class="opcao-pagamento">
+                    <input type="radio" id="pix" name="pagamento" value="pix">
+                    <label for="pix">PIX</label>
+                </div>
+            </div>
+            
+            <div class="troco">
+                <label for="valor-troco">Precisa de troco? Para quanto?</label>
+                <input type="text" id="valor-troco" placeholder="Ex: 50,00">
+            </div>
+            
+            <button class="btn-finalizar" onclick="finalizarPedido()">
+                <i class="fas fa-check-circle"></i> Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <footer id="contato">
+        <p>Júliu's Lanche &copy; 2025 - Todos os direitos reservados</p>
+        <p>Endereço: Rua dos Sabores, 123 - Centro - Telefone: (11) 99999-9999</p>
+        <p>Horário de funcionamento: Segunda a Sábado, das 18h às 23h</p>
+        <div class="redes-sociais">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        let carrinhoItens = [];
+        
+        function incrementar(botao) {
+            const input = botao.parentNode.querySelector('input');
+            input.value = parseInt(input.value) + 1;
+        }
+        
+        function decrementar(botao) {
+            const input = botao.parentNode.querySelector('input');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+        
+        function adicionarAoCarrinho(botao) {
+            const itemCard = botao.parentNode;
+            const nome = itemCard.querySelector('.item-titulo').textContent;
+            const precoTexto = itemCard.querySelector('.item-preco').textContent;
+            const preco = parseFloat(precoTexto.replace('R$ ', '').replace(',', '.'));
+            const quantidade = parseInt(itemCard.querySelector('input').value);
+            
+            // Verificar se o item já está no carrinho
+            const itemExistente = carrinhoItens.find(item => item.nome === nome);
+            
+            if (itemExistente) {
+                itemExistente.quantidade += quantidade;
+            } else {
+                carrinhoItens.push({
+                    nome: nome,
+                    preco: preco,
+                    quantidade: quantidade
+                });
+            }
+            
+            atualizarCarrinho();
+            
+            // Feedback visual
+            botao.innerHTML = "<i class='fas fa-check'></i> Adicionado!";
+            setTimeout(() => {
+                if (botao.classList.contains('refri')) {
+                    botao.innerHTML = "<i class='fas fa-cart-plus'></i> Adicionar ao Carrinho";
+                } else {
+                    botao.innerHTML = "<i class='fas fa-cart-plus'></i> Adicionar ao Carrinho";
+                }
+            }, 1500);
+            
+            // Animar o ícone do carrinho
+            document.querySelector('.carrinho-flutuante').classList.add('animar');
+            setTimeout(() => {
+                document.querySelector('.carrinho-flutuante').classList.remove('animar');
+            }, 500);
+        }
+        
+        function atualizarCarrinho() {
+            const carrinhoElement = document.querySelector('.carrinho-itens');
+            const totalElement = document.querySelector('.carrinho-total span:last-child');
+            const contadorElement = document.querySelector('.contador-carrinho');
+            
+            // Limpar carrinho
+            carrinhoElement.innerHTML = '';
+            
+            if (carrinhoItens.length === 0) {
+                carrinhoElement.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio.</p>';
+                totalElement.textContent = 'R$ 0,00';
+                contadorElement.textContent = '0';
+                return;
+            }
+            
+            let total = 0;
+            let totalItens = 0;
+            
+            // Adicionar itens ao carrinho
+            carrinhoItens.forEach((item, index) => {
+                const itemTotal = item.preco * item.quantidade;
+                total += itemTotal;
+                totalItens += item.quantidade;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'carrinho-item';
+                itemElement.innerHTML = `
+                    <div class="carrinho-item-info">
+                        <span>${item.quantidade}x </span>
+                        <span>${item.nome}</span>
+                    </div>
+                    <div>
+                        <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                        <button class="carrinho-item-remover" onclick="removerDoCarrinho(${index})">X</button>
+                    </div>
+                `;
+                
+                carrinhoElement.appendChild(itemElement);
+            });
+            
+            totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            contadorElement.textContent = totalItens;
+        }
+        
+        function removerDoCarrinho(index) {
+            carrinhoItens.splice(index, 1);
+            atualizarCarrinho();
+        }
+        
+        function scrollToCarrinho() {
+            document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function finalizarPedido() {
+            if (carrinhoItens.length === 0) {
+                alert('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.');
+                return;
+            }
+            
+            const formaPagamento = document.querySelector('input[name="pagamento"]:checked').value;
+            const trocoInput = document.getElementById('valor-troco').value;
+            
+            let mensagem = 'Pedido finalizado com sucesso!\n\n';
+            mensagem += 'Itens do pedido:\n';
+            
+            let total = 0;
+            carrinhoItens.forEach(item => {
+                const itemTotal = item.preco * item.quantidade;
+                total += itemTotal;
+                mensagem += `${item.quantidade}x ${item.nome} - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+            });
+            
+            mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}\n`;
+            mensagem += `Forma de pagamento: ${formaPagamento}\n`;
+            
+            if (formaPagamento === 'dinheiro' && trocoInput) {
+                const troco = parseFloat(trocoInput.replace(',', '.'));
+                if (troco > total) {
+                    const valorTroco = troco - total;
+                    mensagem += `Troco para: R$ ${troco.toFixed(2).replace('.', ',')}\n`;
+                    mensagem += `Seu troco: R$ ${valorTroco.toFixed(2).replace('.', ',')}`;
+                }
+            }
+            
+            alert(mensagem);
+            
+            // Limpar carrinho após finalizar pedido
+            carrinhoItens = [];
+            atualizarCarrinho();
+            document.getElementById('valor-troco').value = '';
+        }
+
+        function filtrarCardapio(categoria) {
+            // Atualizar botões ativos
+            document.querySelectorAll('.categoria-btn').forEach(btn => {
+                btn.classList.remove('ativo');
+            });
+            event.target.classList.add('ativo');
+            
+            // Filtrar itens
+            const itens = document.querySelectorAll('.item-cardapio');
+            itens.forEach(item => {
+                if (categoria === 'tudo') {
+                    item.style.display = 'block';
+                } else {
+                    if (item.getAttribute('data-categoria') === categoria) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+
+            // Scroll para a seção correspondente
+            if (categoria === 'refrigerantes') {
+                document.getElementById('refrigerantes').scrollIntoView({ behavior: 'smooth' });
+            } else if (categoria === 'lanches') {
+                document.getElementById('cardapio').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
